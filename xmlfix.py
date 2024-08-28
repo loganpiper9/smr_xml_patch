@@ -1,5 +1,7 @@
 import os
 import time
+from tkinter import Tk
+from tkinter.filedialog import askdirectory
 
 print("#########################")
 print("######################### Logan's Sid Meier's Railroad's Patcher")
@@ -9,8 +11,16 @@ print("######################### This tool changes the file modified timestamp o
 print("######################### This will allow you to launch custom maps without any runtime errors.")
 print("#########################")
 
-# Prompt the user for a directory, default to the current one
-directory = input(f"Enter the directory path (default is current directory: {os.getcwd()}): ") or os.getcwd()
+# Hide the root window
+root = Tk()
+root.withdraw()
+
+# Bring up the Windows directory selection prompt
+directory = askdirectory(initialdir=os.getcwd(), title="Select Directory")
+
+# If the user cancels, default to the current directory
+if not directory:
+    directory = os.getcwd()
 
 # Loop through all files in the directory
 for filename in os.listdir(directory):
